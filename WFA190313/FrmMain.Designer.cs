@@ -65,9 +65,11 @@
             this.cbNevek.Name = "cbNevek";
             this.cbNevek.Size = new System.Drawing.Size(258, 33);
             this.cbNevek.TabIndex = 2;
+            this.cbNevek.SelectedIndexChanged += new System.EventHandler(this.CbNevek_SelectedIndexChanged);
             // 
             // btnUjLama
             // 
+            this.btnUjLama.Enabled = false;
             this.btnUjLama.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnUjLama.Location = new System.Drawing.Point(12, 143);
             this.btnUjLama.Name = "btnUjLama";
@@ -75,6 +77,7 @@
             this.btnUjLama.TabIndex = 3;
             this.btnUjLama.Text = "Új Láma";
             this.btnUjLama.UseVisualStyleBackColor = true;
+            this.btnUjLama.Click += new System.EventHandler(this.BtnUjLama_Click);
             // 
             // lblSzulEv
             // 
@@ -122,7 +125,7 @@
             this.tbIz.Size = new System.Drawing.Size(141, 32);
             this.tbIz.TabIndex = 1;
             // 
-            // Form1
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -136,7 +139,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "FrmMain";
             this.Text = "Lámák";
             this.ResumeLayout(false);
             this.PerformLayout();

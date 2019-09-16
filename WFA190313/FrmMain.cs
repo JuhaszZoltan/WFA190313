@@ -13,16 +13,35 @@ namespace WFA190313
 {
     public partial class FrmMain : Form
     {
+        static Random rnd = new Random();
         public List<Lama> lamak;
 
         public FrmMain()
         {
             InitializeComponent();
+
+            tbNev.TextChanged += TbkTextChanged;
+            tbEv.TextChanged += TbkTextChanged;
+            tbIz.TextChanged += TbkTextChanged;
+
+            this.BackColor = Color.FromArgb(
+                rnd.Next(256),
+                rnd.Next(256),
+                rnd.Next(256));
+
             lamak = new List<Lama>();
             ListaFeltolt();
             CbFeltolt();
 
 
+        }
+
+        private void TbkTextChanged(object sender, EventArgs e)
+        {
+            btnUjLama.Enabled =
+                tbNev.Text.Length != 0 &&
+                tbEv.Text.Length != 0 &&
+                tbIz.Text.Length != 0;
         }
 
         private void CbFeltolt()
@@ -42,6 +61,33 @@ namespace WFA190313
                 lamak.Add(new Lama(sr.ReadLine()));
             }
             sr.Close();
+        }
+
+        private void CbNevek_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lblSzulEv.ForeColor = 
+                (lamak[cbNevek.SelectedIndex].Iz == "édes")
+                ? Color.Pink : Color.LightBlue;
+            /*
+            if (lamak[cbNevek.SelectedIndex].Iz == "édes")
+                lblSzulEv.ForeColor = Color.Pink;
+            else lblSzulEv.ForeColor = Color.LightBlue;
+            */
+
+            lblSzulEv.Text = lamak[cbNevek.SelectedIndex].SzulEv + "";
+        }
+
+        private void BtnUjLama_Click(object sender, EventArgs e)
+        {
+            int ev = -1;
+
+            if (cbNevek.Items.Contains(tbNev.Text))
+                MessageBox.Show("Nár van ilyen név!");
+            else if (!int.TryParse(tbEv.Text, out ev))
+                MessageBox.Show("nem szám");
+            else if (tbIz.Text != "édes" && tbIz.Text != "sós")
+                MessageBox.Show("nem jó íz");
+            else MessageBox.Show("rögzít");
         }
     }
 }
