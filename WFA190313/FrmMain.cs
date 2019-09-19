@@ -79,15 +79,20 @@ namespace WFA190313
 
         private void BtnUjLama_Click(object sender, EventArgs e)
         {
-            int ev = -1;
-
             if (cbNevek.Items.Contains(tbNev.Text))
                 MessageBox.Show("Nár van ilyen név!");
-            else if (!int.TryParse(tbEv.Text, out ev))
+            else if (!int.TryParse(tbEv.Text, out int ev))
                 MessageBox.Show("nem szám");
             else if (tbIz.Text != "édes" && tbIz.Text != "sós")
                 MessageBox.Show("nem jó íz");
-            else MessageBox.Show("rögzít");
+            else
+            {
+                var sw = new StreamWriter(@"lama.txt", true, Encoding.UTF8);
+                sw.WriteLine($"{tbNev.Text};{tbEv.Text};{tbIz.Text}");
+                MessageBox.Show("rögzítve!");
+                sw.Close();
+                Application.Restart();
+            }
         }
     }
 }
